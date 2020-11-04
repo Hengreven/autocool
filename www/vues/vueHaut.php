@@ -1,7 +1,7 @@
 
 <div id ='nav'>
 	<?php
-	echo $menuPrincipalChampionnat;
+	echo $menuPrincipal;
 	?>
 </div>
 	
