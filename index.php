@@ -2,8 +2,5 @@
 
 
 
-echo "Hello World";
-
-
 
 ?>
