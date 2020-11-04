@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS MLR1;
+DROP DATABASE IF EXISTS AUTOCOOL;
 
-CREATE DATABASE IF NOT EXISTS MLR1;
-USE MLR1;
+CREATE DATABASE IF NOT EXISTS AUTOCOOL;
+USE AUTOCOOL;
 # -----------------------------------------------------------------------------
 #       TABLE : ARRET_DE_TRAM
 # -----------------------------------------------------------------------------
