@@ -8,12 +8,12 @@ USE autocool;
 
 CREATE TABLE IF NOT EXISTS ARRET_DE_TRAM
  (
-   CODEARRET VARCHAR(128) NOT NULL  ,
-   NOMARRET VARCHAR(128) NULL  ,
-   VILLEARRET VARCHAR(128) NULL  
+   CODEARRET INTEGER NOT NULL AUTO_INCREMENT ,
+   NOMARRET VARCHAR(25) NULL  ,
+   VILLEARRET VARCHAR(25) NULL
    , PRIMARY KEY (CODEARRET) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : DROIT
@@ -21,11 +21,11 @@ CREATE TABLE IF NOT EXISTS ARRET_DE_TRAM
 
 CREATE TABLE IF NOT EXISTS DROIT
  (
-   CODEDROIT VARCHAR(128) NOT NULL  ,
-   LIBELLEDROIT VARCHAR(128) NULL  
+   CODEDROIT VARCHAR(3) NOT NULL  ,
+   LIBELLEDROIT VARCHAR(50) NULL
    , PRIMARY KEY (CODEDROIT) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : UTILISATEUR
@@ -33,32 +33,22 @@ CREATE TABLE IF NOT EXISTS DROIT
 
 CREATE TABLE IF NOT EXISTS UTILISATEUR
  (
-   LOGIN VARCHAR(128) NOT NULL  ,
-   CODEDROIT VARCHAR(128) NOT NULL  ,
-   NUMABONNE CHAR(32) NULL  ,
-   MDP VARCHAR(128) NULL  ,
+   LOGIN VARCHAR(15) NOT NULL  ,
+   CODEDROIT VARCHAR(3) NOT NULL  ,
+   NUMABONNE INTEGER NULL  ,
+   MDP VARCHAR(32) NULL  ,
    SEXE CHAR(1) NULL  ,
-   EMAIL VARCHAR(128) NULL  ,
-   NOM VARCHAR(128) NULL  ,
-   PRENOM VARCHAR(128) NULL  ,
-   RUE VARCHAR(128) NULL  ,
-   VILLE VARCHAR(128) NULL  ,
-   CODEPOSTAL VARCHAR(128) NULL  ,
+   EMAIL VARCHAR(55) NULL  ,
+   NOM VARCHAR(25) NULL  ,
+   PRENOM VARCHAR(25) NULL  ,
+   RUE VARCHAR(50) NULL  ,
+   VILLE VARCHAR(50) NULL  ,
+   CODEPOSTAL VARCHAR(6) NULL  ,
    DATENAISSANCE DATE NULL  
    , PRIMARY KEY (LOGIN) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE UTILISATEUR
-# -----------------------------------------------------------------------------
-
-
-CREATE  INDEX I_FK_UTILISATEUR_DROIT
-     ON UTILISATEUR (CODEDROIT ASC);
-
-CREATE  INDEX I_FK_UTILISATEUR_ABONNE
-     ON UTILISATEUR (NUMABONNE ASC);
 
 # -----------------------------------------------------------------------------
 #       TABLE : TYPE_VEHICULE
@@ -66,11 +56,11 @@ CREATE  INDEX I_FK_UTILISATEUR_ABONNE
 
 CREATE TABLE IF NOT EXISTS TYPE_VEHICULE
  (
-   CODETYPE VARCHAR(128) NOT NULL  ,
-   LIBELLETYPE VARCHAR(128) NULL  
+   CODETYPE VARCHAR(3) NOT NULL  ,
+   LIBELLETYPE VARCHAR(50) NULL
    , PRIMARY KEY (CODETYPE) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : DATE
@@ -81,7 +71,7 @@ CREATE TABLE IF NOT EXISTS DATE
    DATERESERVATION DATE NOT NULL  
    , PRIMARY KEY (DATERESERVATION) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : ABONNE
@@ -89,34 +79,26 @@ CREATE TABLE IF NOT EXISTS DATE
 
 CREATE TABLE IF NOT EXISTS ABONNE
  (
-   NUMABONNE CHAR(32) NOT NULL  ,
-   CODEFORMULE VARCHAR(128) NOT NULL  ,
-   NUMPERMIS VARCHAR(128) NULL  ,
-   LIEUOBTENTIONPERMIS VARCHAR(128) NULL  ,
-   MODEPAIEMENT VARCHAR(128) NULL  ,
-   MODEFACTURATION VARCHAR(128) NULL  ,
-   TITULAIRECOMPTE VARCHAR(128) NULL  ,
-   NUMCOMPTECLE VARCHAR(128) NULL  ,
-   NOMBANQUE VARCHAR(128) NULL  ,
-   BANQUEGUICHET VARCHAR(128) NULL  ,
-   IBAN VARCHAR(128) NULL  ,
-   BIC VARCHAR(128) NULL  ,
+   NUMABONNE INTEGER NOT NULL AUTO_INCREMENT ,
+   CODEFORMULE VARCHAR(3) NOT NULL  ,
+   NUMPERMIS VARCHAR(20) NULL  ,
+   LIEUOBTENTIONPERMIS VARCHAR(20) NULL  ,
+   MODEPAIEMENT VARCHAR(20) NULL  ,
+   MODEFACTURATION VARCHAR(20) NULL  ,
+   TITULAIRECOMPTE VARCHAR(50) NULL  ,
+   NUMCOMPTECLE VARCHAR(20) NULL  ,
+   NOMBANQUE VARCHAR(20) NULL  ,
+   BANQUEGUICHET VARCHAR(20) NULL  ,
+   IBAN VARCHAR(20) NULL  ,
+   BIC VARCHAR(20) NULL  ,
    JUSTIFICATIFDEDOMICILE BOOL NULL  ,
    SITUATIONASSURANCE BOOL NULL  ,
    DEPOTDEGARANTIE BOOL NULL  ,
    RIB BOOL NULL  ,
-   CHEMINDOSSIERABONNE VARCHAR(128) NULL  
+   CHEMINDOSSIERABONNE VARCHAR(255) NULL
    , PRIMARY KEY (NUMABONNE) 
  ) 
- comment = "";
-
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE ABONNE
-# -----------------------------------------------------------------------------
-
-
-CREATE  INDEX I_FK_ABONNE_FORMULE
-     ON ABONNE (CODEFORMULE ASC);
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : STATION
@@ -124,12 +106,12 @@ CREATE  INDEX I_FK_ABONNE_FORMULE
 
 CREATE TABLE IF NOT EXISTS STATION
  (
-   NUMSTATION CHAR(32) NOT NULL  ,
-   VILLESTATION VARCHAR(128) NULL  ,
-   LIEU VARCHAR(128) NULL  
+   NUMSTATION INTEGER NOT NULL AUTO_INCREMENT ,
+   VILLESTATION VARCHAR(25) NULL  ,
+   LIEU VARCHAR(25) NULL  
    , PRIMARY KEY (NUMSTATION) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : VEHICULE
@@ -137,25 +119,15 @@ CREATE TABLE IF NOT EXISTS STATION
 
 CREATE TABLE IF NOT EXISTS VEHICULE
  (
-   NUMIMMAT VARCHAR(128) NOT NULL  ,
-   CODECATEGORIE VARCHAR(128) NOT NULL  ,
-   NUMSTATION CHAR(32) NOT NULL  ,
-   KILOMETRAGE SMALLINT(1) NULL  ,
-   NIVEAUESSENCE SMALLINT(1) NULL  
+   NUMIMMAT VARCHAR(10) NOT NULL  ,
+   CODECATEGORIE VARCHAR(3) NOT NULL  ,
+   NUMSTATION INTEGER NOT NULL  ,
+   KILOMETRAGE SMALLINT NULL  ,
+   NIVEAUESSENCE SMALLINT NULL  
    , PRIMARY KEY (NUMIMMAT) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE VEHICULE
-# -----------------------------------------------------------------------------
-
-
-CREATE  INDEX I_FK_VEHICULE_CATEGORIE
-     ON VEHICULE (CODECATEGORIE ASC);
-
-CREATE  INDEX I_FK_VEHICULE_STATION
-     ON VEHICULE (NUMSTATION ASC);
 
 # -----------------------------------------------------------------------------
 #       TABLE : TRANCHE_HORAIRE
@@ -163,11 +135,11 @@ CREATE  INDEX I_FK_VEHICULE_STATION
 
 CREATE TABLE IF NOT EXISTS TRANCHE_HORAIRE
  (
-   CODETRANCHEH VARCHAR(128) NOT NULL  ,
-   LIBELLETRANCHEH VARCHAR(128) NULL  
+   CODETRANCHEH VARCHAR(3) NOT NULL  ,
+   LIBELLETRANCHEH VARCHAR(50) NULL
    , PRIMARY KEY (CODETRANCHEH) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : TRANCHE_KILOMETRIQUE
@@ -175,11 +147,11 @@ CREATE TABLE IF NOT EXISTS TRANCHE_HORAIRE
 
 CREATE TABLE IF NOT EXISTS TRANCHE_KILOMETRIQUE
  (
-   CODETRANCHEKM VARCHAR(128) NOT NULL  ,
-   LIBELLETRANCHEKM VARCHAR(128) NULL  
+   CODETRANCHEKM VARCHAR(3) NOT NULL  ,
+   LIBELLETRANCHEKM VARCHAR(50) NULL
    , PRIMARY KEY (CODETRANCHEKM) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : PARKING
@@ -187,23 +159,17 @@ CREATE TABLE IF NOT EXISTS TRANCHE_KILOMETRIQUE
 
 CREATE TABLE IF NOT EXISTS PARKING
  (
-   NUMPARKING CHAR(32) NOT NULL  ,
-   NUMSTATION CHAR(32) NOT NULL  ,
-   NOMPARKING VARCHAR(128) NULL  ,
-   NIVEAU SMALLINT(1) NULL  ,
-   VILLESTATION VARCHAR(128) NULL  ,
-   LIEU VARCHAR(128) NULL  
+   NUMPARKING INTEGER NOT NULL AUTO_INCREMENT ,
+   NUMSTATION INTEGER NOT NULL  ,
+   NOMPARKING VARCHAR(25) NULL  ,
+   NIVEAU SMALLINT NULL  ,
+   VILLESTATION VARCHAR(25) NULL  ,
+   LIEU VARCHAR(25) NULL  
    , PRIMARY KEY (NUMPARKING) 
  ) 
- comment = "";
-
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE PARKING
-# -----------------------------------------------------------------------------
+ ENGINE = InnoDB;
 
 
-CREATE  INDEX I_FK_PARKING_STATION
-     ON PARKING (NUMSTATION ASC);
 
 # -----------------------------------------------------------------------------
 #       TABLE : CATEGORIE
@@ -211,20 +177,14 @@ CREATE  INDEX I_FK_PARKING_STATION
 
 CREATE TABLE IF NOT EXISTS CATEGORIE
  (
-   CODECATEGORIE VARCHAR(128) NOT NULL  ,
-   CODETYPE VARCHAR(128) NOT NULL  ,
-   LIBELLECATEGORIE VARCHAR(128) NULL  
+   CODECATEGORIE VARCHAR(3) NOT NULL  ,
+   CODETYPE VARCHAR(50) NOT NULL  ,
+   LIBELLECATEGORIE VARCHAR(50) NULL
    , PRIMARY KEY (CODECATEGORIE) 
  ) 
- comment = "";
-
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE CATEGORIE
-# -----------------------------------------------------------------------------
+ ENGINE = InnoDB;
 
 
-CREATE  INDEX I_FK_CATEGORIE_TYPE_VEHICULE
-     ON CATEGORIE (CODETYPE ASC);
 
 # -----------------------------------------------------------------------------
 #       TABLE : VOIRIE
@@ -232,23 +192,15 @@ CREATE  INDEX I_FK_CATEGORIE_TYPE_VEHICULE
 
 CREATE TABLE IF NOT EXISTS VOIRIE
  (
-   NUMVOIRIE CHAR(32) NOT NULL  ,
-   NUMSTATION CHAR(32) NOT NULL  ,
-   ADRESSE VARCHAR(128) NULL  ,
-   NBPLACES SMALLINT(1) NULL  ,
-   VILLESTATION VARCHAR(128) NULL  ,
-   LIEU VARCHAR(128) NULL  
+   NUMVOIRIE INTEGER NOT NULL AUTO_INCREMENT ,
+   NUMSTATION INTEGER NOT NULL  ,
+   ADRESSE VARCHAR(25) NULL  ,
+   NBPLACES SMALLINT NULL  ,
+   VILLESTATION VARCHAR(25) NULL  ,
+   LIEU VARCHAR(25) NULL  
    , PRIMARY KEY (NUMVOIRIE) 
  ) 
- comment = "";
-
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE VOIRIE
-# -----------------------------------------------------------------------------
-
-
-CREATE  INDEX I_FK_VOIRIE_STATION
-     ON VOIRIE (NUMSTATION ASC);
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : LIGNE_TRAM
@@ -256,11 +208,11 @@ CREATE  INDEX I_FK_VOIRIE_STATION
 
 CREATE TABLE IF NOT EXISTS LIGNE_TRAM
  (
-   CODELIGNE VARCHAR(128) NOT NULL  ,
-   VILLELIGNE VARCHAR(128) NULL  
+   CODELIGNE VARCHAR(1) NOT NULL  ,
+   VILLELIGNE VARCHAR(50) NULL
    , PRIMARY KEY (CODELIGNE) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : FORMULE
@@ -268,16 +220,16 @@ CREATE TABLE IF NOT EXISTS LIGNE_TRAM
 
 CREATE TABLE IF NOT EXISTS FORMULE
  (
-   CODEFORMULE VARCHAR(128) NOT NULL  ,
-   LIBELLEFORMULE VARCHAR(128) NULL  ,
+   CODEFORMULE VARCHAR(3) NOT NULL  ,
+   LIBELLEFORMULE VARCHAR(50) NULL  ,
    FRAISADHESION DECIMAL(13,2) NULL  ,
    TARIFMENSUEL DECIMAL(13,2) NULL  ,
-   PARTSSOCIALE INTEGER(2) NULL  ,
+   PARTSSOCIALE INTEGER NULL  ,
    DEPOTGARANTIE DECIMAL(13,2) NULL  ,
    CAUTION DECIMAL(13,2) NULL  
    , PRIMARY KEY (CODEFORMULE) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
 # -----------------------------------------------------------------------------
 #       TABLE : EST_PROCHE
@@ -285,22 +237,12 @@ CREATE TABLE IF NOT EXISTS FORMULE
 
 CREATE TABLE IF NOT EXISTS EST_PROCHE
  (
-   CODEARRET VARCHAR(128) NOT NULL  ,
-   NUMSTATION CHAR(32) NOT NULL  
+   CODEARRET INTEGER NOT NULL  ,
+   NUMSTATION INTEGER NOT NULL  
    , PRIMARY KEY (CODEARRET,NUMSTATION) 
  ) 
- comment = "";
+ ENGINE = InnoDB;
 
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE EST_PROCHE
-# -----------------------------------------------------------------------------
-
-
-CREATE  INDEX I_FK_EST_PROCHE_ARRET_DE_TRAM
-     ON EST_PROCHE (CODEARRET ASC);
-
-CREATE  INDEX I_FK_EST_PROCHE_STATION
-     ON EST_PROCHE (NUMSTATION ASC);
 
 # -----------------------------------------------------------------------------
 #       TABLE : RESERVER
@@ -308,32 +250,20 @@ CREATE  INDEX I_FK_EST_PROCHE_STATION
 
 CREATE TABLE IF NOT EXISTS RESERVER
  (
-   NUMABONNE CHAR(32) NOT NULL  ,
-   NUMIMMAT VARCHAR(128) NOT NULL  ,
+   NUMABONNE INTEGER NOT NULL  ,
+   NUMIMMAT VARCHAR(10) NOT NULL  ,
    DATERESERVATION DATE NOT NULL  ,
    DATEDEBUT DATETIME NULL  ,
    DATEFIN DATETIME NULL  ,
-   NBKMS SMALLINT(1) NULL  ,
+   NBKMS SMALLINT NULL  ,
    MONTANTRESA REAL(5,2) NULL  ,
-   ETATVEHICULE VARCHAR(128) NULL  ,
-   PROPRETEVEHICULE VARCHAR(128) NULL  
+   ETATVEHICULE VARCHAR(50) NULL  ,
+   PROPRETEVEHICULE VARCHAR(50) NULL
    , PRIMARY KEY (NUMABONNE,NUMIMMAT,DATERESERVATION) 
  ) 
- comment = "";
-
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE RESERVER
-# -----------------------------------------------------------------------------
+ ENGINE = InnoDB;
 
 
-CREATE  INDEX I_FK_RESERVER_ABONNE
-     ON RESERVER (NUMABONNE ASC);
-
-CREATE  INDEX I_FK_RESERVER_VEHICULE
-     ON RESERVER (NUMIMMAT ASC);
-
-CREATE  INDEX I_FK_RESERVER_DATE
-     ON RESERVER (DATERESERVATION ASC);
 
 # -----------------------------------------------------------------------------
 #       TABLE : TARIFS_KM
@@ -341,27 +271,15 @@ CREATE  INDEX I_FK_RESERVER_DATE
 
 CREATE TABLE IF NOT EXISTS TARIFS_KM
  (
-   CODETYPE VARCHAR(128) NOT NULL  ,
-   CODETRANCHEKM VARCHAR(128) NOT NULL  ,
-   CODEFORMULE VARCHAR(128) NOT NULL  ,
+   CODETYPE VARCHAR(3) NOT NULL  ,
+   CODETRANCHEKM VARCHAR(3) NOT NULL  ,
+   CODEFORMULE VARCHAR(3) NOT NULL  ,
    PRIX DECIMAL(13,2) NULL  
    , PRIMARY KEY (CODETYPE,CODETRANCHEKM,CODEFORMULE) 
  ) 
- comment = "";
-
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE TARIFS_KM
-# -----------------------------------------------------------------------------
+ ENGINE = InnoDB;
 
 
-CREATE  INDEX I_FK_TARIFS_KM_TYPE_VEHICULE
-     ON TARIFS_KM (CODETYPE ASC);
-
-CREATE  INDEX I_FK_TARIFS_KM_TRANCHE_KILOMETRIQUE
-     ON TARIFS_KM (CODETRANCHEKM ASC);
-
-CREATE  INDEX I_FK_TARIFS_KM_FORMULE
-     ON TARIFS_KM (CODEFORMULE ASC);
 
 # -----------------------------------------------------------------------------
 #       TABLE : APPARTIENT
@@ -369,22 +287,13 @@ CREATE  INDEX I_FK_TARIFS_KM_FORMULE
 
 CREATE TABLE IF NOT EXISTS APPARTIENT
  (
-   CODEARRET VARCHAR(128) NOT NULL  ,
-   CODELIGNE VARCHAR(128) NOT NULL  
+   CODEARRET INTEGER NOT NULL  ,
+   CODELIGNE VARCHAR(3) NOT NULL
    , PRIMARY KEY (CODEARRET,CODELIGNE) 
  ) 
- comment = "";
-
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE APPARTIENT
-# -----------------------------------------------------------------------------
+ ENGINE = InnoDB;
 
 
-CREATE  INDEX I_FK_APPARTIENT_ARRET_DE_TRAM
-     ON APPARTIENT (CODEARRET ASC);
-
-CREATE  INDEX I_FK_APPARTIENT_LIGNE_TRAM
-     ON APPARTIENT (CODELIGNE ASC);
 
 # -----------------------------------------------------------------------------
 #       TABLE : TARIFS_HORAIRE
@@ -392,27 +301,15 @@ CREATE  INDEX I_FK_APPARTIENT_LIGNE_TRAM
 
 CREATE TABLE IF NOT EXISTS TARIFS_HORAIRE
  (
-   CODETYPE VARCHAR(128) NOT NULL  ,
-   CODETRANCHEH VARCHAR(128) NOT NULL  ,
-   CODEFORMULE VARCHAR(128) NOT NULL  ,
+   CODETYPE VARCHAR(3) NOT NULL  ,
+   CODETRANCHEH VARCHAR(3) NOT NULL  ,
+   CODEFORMULE VARCHAR(3) NOT NULL  ,
    PRIX DECIMAL(13,2) NULL  
    , PRIMARY KEY (CODETYPE,CODETRANCHEH,CODEFORMULE) 
  ) 
- comment = "";
-
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE TARIFS_HORAIRE
-# -----------------------------------------------------------------------------
+ ENGINE = InnoDB;
 
 
-CREATE  INDEX I_FK_TARIFS_HORAIRE_TYPE_VEHICULE
-     ON TARIFS_HORAIRE (CODETYPE ASC);
-
-CREATE  INDEX I_FK_TARIFS_HORAIRE_TRANCHE_HORAIRE
-     ON TARIFS_HORAIRE (CODETRANCHEH ASC);
-
-CREATE  INDEX I_FK_TARIFS_HORAIRE_FORMULE
-     ON TARIFS_HORAIRE (CODEFORMULE ASC);
 
 
 # -----------------------------------------------------------------------------
