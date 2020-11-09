@@ -12,8 +12,7 @@ CREATE TABLE IF NOT EXISTS ARRET_DE_TRAM
    NOMARRET VARCHAR(128) NULL  ,
    VILLEARRET VARCHAR(128) NULL  
    , PRIMARY KEY (CODEARRET) 
- ) 
- comment = "";
+ )
 
 # -----------------------------------------------------------------------------
 #       TABLE : DROIT
@@ -24,8 +23,7 @@ CREATE TABLE IF NOT EXISTS DROIT
    CODEDROIT VARCHAR(128) NOT NULL  ,
    LIBELLEDROIT VARCHAR(128) NULL  
    , PRIMARY KEY (CODEDROIT) 
- ) 
- comment = "";
+ )
 
 # -----------------------------------------------------------------------------
 #       TABLE : UTILISATEUR
