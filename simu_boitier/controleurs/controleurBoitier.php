@@ -1,6 +1,5 @@
 <?php
 
-
 $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
 
 $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('pin', 'Entrer code PIN :'), 1);
@@ -20,23 +19,25 @@ if (isset($_POST['pin']) && $_POST['pin'] == 1234) {
 
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputSubmit('submitConnex', 'submitConnex', 'Valider', ''), 2);
     $formulaireConnexion->ajouterComposantTab();
-
 } else if (isset($_POST['etat_propre_ext'])) {
 
     $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('new_damage', 'Avez-vous de nouveaux dégats à signaler ? :'), 1);
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputRadio('new_damage', 'new_damage', 'oui', false, 'OUI'), 1);
-    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputRadio('new_damage', 'new_damage', 'non', false, 'NON'), 1);    
+    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputRadio('new_damage', 'new_damage', 'non', false, 'NON'), 1);
     $formulaireConnexion->ajouterComposantTab();
 
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputSubmit('submitConnex', 'submitConnex', 'Valider', ''), 2);
     $formulaireConnexion->ajouterComposantTab();
-
 } else if (isset($_POST['new_damage'])) {
 
     $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
-    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputSubmit('submitConnex', 'submitConnex', 'Prenez la clé', ''), 2);
+    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputSubmit('finalsubmit', 'finalsubmit', 'Prenez la clé', 'test()'), 2);
     $formulaireConnexion->ajouterComposantTab();
+
+} else if (isset($_POST['finalsubmit'])) {
+
+    header("Location: index.php?menuPrincipal=Accueil");
 
 } else {
 
@@ -52,4 +53,4 @@ if (isset($_POST['pin']) && $_POST['pin'] == 1234) {
 
 $formulaireConnexion->creerFormulaire();
 
-include_once 'vues/accueil/vueAccueil.php';
+include_once 'vues/boitier/vueboitier.php';

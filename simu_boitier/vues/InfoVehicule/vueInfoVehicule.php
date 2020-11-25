@@ -4,23 +4,23 @@
     </header>
 
     <main>
-    <?php
-    foreach ($vehicules as $key) {
-    
-        echo "<div id=\"info_vehicule\">";
-        // <h1>Infos du véhicule</h1>
-        // <p>Numéro d'immatriculation : <?php echo $vehicule->getNum_immat();</p>
-        // <p>code catégorie du véhicule : </p>
-        // <p>Numéro de la station : </p>
-        // <p>Kilométrage du véhicule : </p>
-        // <p>Niveau d'essence du véhicule : </p>
-        echo "</div>";
-    }
-    ?>
+        <?php
+        foreach ($vehicules->getVehicules() as $vehicule) {
+        ?>
+            <div id="info_vehicule">
+                <h1>Infos du véhicule</h1>
+                <p>Numéro d'immatriculation : <?php echo $vehicule->getNumimmat(); ?></p>
+                <p>code catégorie du véhicule : <?php echo $vehicule->getCodecategorie(); ?></p>
+                <p>Numéro de la station : <?php echo $vehicule->getNumstation(); ?></p>
+                <p>Kilométrage du véhicule : <?php echo $vehicule->getKilometrage(); ?></p>
+                <p>Niveau d'essence du véhicule : <?php echo $vehicule->getNiveauessence(); ?>%</p>
+            </div>
+        <?php
+        }
+        ?>
     </main>
     <footer>
     </footer>
-        <?php include 'vues/vueBas.php'; ?>
+    <?php include 'vues/vueBas.php'; ?>
     </footer>
 </div>
-
