@@ -9,13 +9,12 @@ if (isset($_GET['menuPrincipal'])) {
 
 $menuPrincipal = new Menu("menuPrincipal");
 
+$menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("Accueil",  "images/home.png", "Accueil"));
 
-$menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("AffichageInfosVehicule",  "images/equipe.png", "Infos Vehicule"));
+$menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("AffichageInfosVehicule",  "images/car.jpg", "Infos Vehicule"));
 
-$menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("Accueil",  "images/deconnex.png", "Deconnexion"));
-
+$menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("Boitier",  "images/boitier_pin.jpg", "Boitier"));
 
 $menuPrincipal = $menuPrincipal->creerMenu("menuPrincipal", $_SESSION['menuPrincipal']);
-
 
 include_once dispatcher::dispatch($_SESSION['menuPrincipal']);
