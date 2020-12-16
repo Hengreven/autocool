@@ -125,12 +125,13 @@ class Formulaire
 	{
 		$composant = "<select  name = '" . $unNom . "' id = '" . $unId . "' >";
 		$i = 0;
+		$composant .= "<option value=''>Qui êtes-vous ?</option>";
 		foreach ($options as $option) {
 			$composant .= "<option value = '";
-			$tab = $options[$i];
-			$composant .= $tab->getIdEquipe();
+			$tab = $option;
+			$composant .= $tab->getLogin();
 			$i++;
-			$composant .= "'> " . $tab->getNomEquipe();
+			$composant .= "'> " . $tab->getLogin();
 			$composant .= "</option>";
 		}
 		$composant .= "</select></td></tr>";

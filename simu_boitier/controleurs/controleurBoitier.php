@@ -1,16 +1,29 @@
 <?php
 
+$utilisateurs = new Utilisateurs(boitierDAO::recupInfoUtilisateur());
+$listeUser = $utilisateurs->getUtilisateurs();
+$utilisateurConnecte = "";
+
 $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
 
-$formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('pin', 'Entrer code PIN :'), 1);
-$formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputMaxLenght('pin', 'pin', '', 1, 4), 1);
+$formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('login', 'Qui êtes vous :'), 1);
+$formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerSelect('login', 'login', '', $listeUser), 1);
 $formulaireConnexion->ajouterComposantTab();
 
 $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputSubmit('submitConnex', 'submitConnex', 'Valider', ''), 2);
 $formulaireConnexion->ajouterComposantTab();
 
+if (isset($_POST['login']) && $_POST['login'] != "") {
+    $utilisateurConnecte = $_POST['login'];
+    $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
 
-if (isset($_POST['pin']) && $_POST['pin'] == 1234) {
+    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('pin', 'Entrer code PIN :'), 1);
+    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputMaxLenght('pin', 'pin', '', 1, 4), 1);
+    $formulaireConnexion->ajouterComposantTab();
+
+    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputSubmit('submitConnex', 'submitConnex', 'Valider', ''), 2);
+    $formulaireConnexion->ajouterComposantTab();
+} else if (isset($_POST['pin']) && boitierDAO::verifPIN($utilisateurConnecte, $_POST['pin'])) {
 
     $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('etat_propre_ext', 'Notez l\'état de propreté EXTERIEURE'), 1);
@@ -34,17 +47,15 @@ if (isset($_POST['pin']) && $_POST['pin'] == 1234) {
     $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputSubmit('finalsubmit', 'finalsubmit', 'Prenez la clé', 'test()'), 2);
     $formulaireConnexion->ajouterComposantTab();
-
 } else if (isset($_POST['finalsubmit'])) {
 
     header("Location: index.php?menuPrincipal=Accueil");
-
 } else {
 
     $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
 
-    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('pin', 'Entrer code PIN :'), 1);
-    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputMaxLenght('pin', 'pin', '', 1, 4), 1);
+    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('login', 'Qui êtes vous :'), 1);
+    $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerSelect('login', 'login', '', $listeUser), 1);
     $formulaireConnexion->ajouterComposantTab();
 
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputSubmit('submitConnex', 'submitConnex', 'Valider', ''), 2);
