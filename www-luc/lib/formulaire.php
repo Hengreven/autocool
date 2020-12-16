@@ -72,6 +72,59 @@ class Formulaire{
 		$composant .= "/>";
 		return $composant;
 	}
+
+
+	public function creerInputDate($unNom, $unId, $uneValue , $required){
+		$composant = "<input type = 'date' name = '" . $unNom . "' id = '" . $unId . "' ";
+		
+		if (!empty($uneValue)){
+			$composant .= "value = '" . $uneValue . "' ";
+		}
+		
+		if ( $required == 1){
+			$composant .= " required ";
+		}
+		
+		$composant .= "/>";
+		return $composant;
+	}
+
+
+	
+	public function creerInputCheckbox($unNom, $unId, $uneValue , $required){
+		
+		$composant = "<label for=".$unId.">".$uneValue."</label> <input type = 'checkbox' name = '" . $unNom . "' id = '" . $unId . "' ";
+		
+		if (!empty($uneValue)){
+			$composant .= "value = '" . $uneValue . "' ";
+		}
+		
+		if ( $required == 1){
+			$composant .= " required ";
+		}
+		
+		$composant .= "/>";
+		return $composant;
+	}
+
+
+
+/*	public function creerIndeication($unNom){
+		
+		$composant = "<input type = 'checkbox' name = '" . $unNom . "' id = '" . $unId . "' ";
+		
+		if (!empty($uneValue)){
+			$composant .= "value = '" . $uneValue . "' ";
+		}
+		
+		if ( $required == 1){
+			$composant .= " required ";
+		}
+		
+		$composant .= "/>";
+		return $composant;
+	}	*/
+
 	
 	public function creerLabelFor($unFor,  $unLabel){
 		$composant = "<label for='" . $unFor . "'>" . $unLabel . "</label>";
@@ -84,9 +137,9 @@ class Formulaire{
 		foreach ($options as $option){
 			$composant .= "<option value = '" ;
 			$tab = $options[$i];
-			$composant .= $tab->getIdEquipe();
+			$composant .= $tab;
 			$i++;
-			$composant .= "'> " . $tab->getNomEquipe();
+			$composant .= "'> " . $tab;
 			$composant .= "</option>";
 		}
 		$composant .= "</select></td></tr>";

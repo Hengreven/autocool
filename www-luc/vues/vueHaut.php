@@ -1,7 +1,7 @@
 
 <div id ='nav'>
 	<?php
-	echo $menuPrincipalAutocool;
+	echo $menuPrincipal;
 	?>
 </div>
 	

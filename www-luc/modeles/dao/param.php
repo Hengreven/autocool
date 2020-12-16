@@ -3,6 +3,6 @@
 class Param {
 	public static $user = 'root';
 	public static $pass = '';
-	public static $dsn = 'mysql:host=localhost:3306;dbname=AUTOCOOL;charset=utf8';
+	public static $dsn = 'mysql:host=localhost:3306;dbname=autocool;charset=utf8';
 }
 ?>
