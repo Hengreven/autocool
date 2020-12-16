@@ -8,42 +8,67 @@ class Vehicule {
     private $kilometrage; //Kilométrage du véhicule
     private $niveauessence; //Niveau d'essence du véhicule
 
+    
     /**
-     * Get the value of num_immat
+     * Get the value of numimmat
      */ 
-    public function getNum_immat()
+    public function getNumimmat()
     {
-        return $this->num_immat;
+        return $this->numimmat;
     }
-
+    
     /**
-     * Get the value of code_cat
-     */ 
-    public function getCode_cat()
-    {
-        return $this->code_cat;
-    }
-
-    /**
-     * Get the value of num_station
-     */ 
-    public function getNum_station()
-    {
-        return $this->num_station;
-    }
-
-    /**
-     * Set the value of num_station
+     * Set the value of numimmat
      *
      * @return  self
      */ 
-    public function setNum_station($num_station)
+    public function setNumimmat($numimmat)
     {
-        $this->num_station = $num_station;
-
+        $this->numimmat = $numimmat;
+        
         return $this;
     }
-
+    
+    /**
+     * Get the value of codecategorie
+     */ 
+    public function getCodecategorie()
+    {
+        return $this->codecategorie;
+    }
+    
+    /**
+     * Set the value of codecategorie
+     *
+     * @return  self
+     */ 
+    public function setCodecategorie($codecategorie)
+    {
+        $this->codecategorie = $codecategorie;
+        
+        return $this;
+    }
+    
+    /**
+     * Get the value of numstation
+     */ 
+    public function getNumstation()
+    {
+        return $this->numstation;
+    }
+    
+    /**
+     * Set the value of numstation
+     *
+     * @return  self
+     */ 
+    public function setNumstation($numstation)
+    {
+        $this->numstation = $numstation;
+        
+        return $this;
+    }
+    
     /**
      * Get the value of kilometrage
      */ 
@@ -51,7 +76,7 @@ class Vehicule {
     {
         return $this->kilometrage;
     }
-
+    
     /**
      * Set the value of kilometrage
      *
@@ -60,27 +85,26 @@ class Vehicule {
     public function setKilometrage($kilometrage)
     {
         $this->kilometrage = $kilometrage;
-
+        
         return $this;
     }
-
     /**
-     * Get the value of niveau_essence
+     * Get the value of niveauessence
      */ 
-    public function getNiveau_essence()
+    public function getNiveauessence()
     {
-        return $this->niveau_essence;
+        return $this->niveauessence;
     }
-
+    
     /**
-     * Set the value of niveau_essence
+     * Set the value of niveauessence
      *
      * @return  self
      */ 
-    public function setNiveau_essence($niveau_essence)
+    public function setNiveauessence($niveauessence)
     {
-        $this->niveau_essence = $niveau_essence;
-
+        $this->niveauessence = $niveauessence;
+    
         return $this;
     }
 }
