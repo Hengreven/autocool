@@ -56,25 +56,15 @@ class Menu{
 		$composant[0] = $uneValeur ;
 		return $composant;
 	}
-	
-	public function creerMenuEquipe($composantActif){
-		$menu = "<ul class = '" .  $this->style . "'>";
+
+	public function creerMenuStation(){
+		$menu = "<ul class = 'listeStations'>";
 		foreach($this->composants as $composant){
-			if($composant[0] == $composantActif){
-				$menu .= "<li class='actif'><img src='images/";
-                $menu .= strtolower($composant[1]);
-                $menu .= ".png'>";
-				$menu .=  $composant[1] ;
-			}
-			else{
-				$menu .= "<li>";
-				$menu .= "<a href='index.php?action=afficher" ;
-				$menu .= "&equipe=" . $composant[0] . "' ><img src='images/";
-                $menu .= strtolower($composant[1]);
-                $menu .= ".png'>";
-				$menu .= $composant[1] ;
-				$menu .= "</a>";
-			}
+            $menu .= "<li>";
+            $menu .= "<a href='index.php?menuPrincipal=DetailsStation" ;
+            $menu .= "&station=" . $composant[1] . "'";
+            $menu .= "</a>";
+            $menu .= $composant[0] ;
 			$menu .= "</li>";
 		}
 		$menu .= "</ul>";

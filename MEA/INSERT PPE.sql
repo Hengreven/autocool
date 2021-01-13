@@ -1,6 +1,6 @@
 insert into droit (CODEDROIT, LIBELLEDROIT) value ('adm','administateur');
 
-INSERT INTO autocool.utilisateur (LOGIN, CODEDROIT, NUMABONNE, MDP, SEXE, EMAIL, NOM, PRENOM, RUE, VILLE, CODEPOSTAL, DATENAISSANCE) VALUES ('jmazagot', 'adm', null, '21232f297a57a5a743894a0e4a801fc3', null, null, null, null, null, null, null, null);
+INSERT INTO autocool.utilisateur (LOGIN, CODEDROIT, NUMABONNE, MDP, SEXE, EMAIL, NOM, PRENOM, RUE, VILLE, CODEPOSTAL, DATENAISSANCE, CODEPIN) VALUES ('jmazagot', 'adm', null, '21232f297a57a5a743894a0e4a801fc3', null, null, null, null, null, null, null, null,1234);
 
 INSERT INTO STATION (VILLESTATION , LIEU)
 VALUES
