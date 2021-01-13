@@ -2,7 +2,6 @@
 
 $utilisateurs = new Utilisateurs(boitierDAO::recupInfoUtilisateur());
 $listeUser = $utilisateurs->getUtilisateurs();
-$utilisateurConnecte = "";
 
 $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
 
@@ -14,7 +13,7 @@ $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputSubm
 $formulaireConnexion->ajouterComposantTab();
 
 if (isset($_POST['login']) && $_POST['login'] != "") {
-    $utilisateurConnecte = $_POST['login'];
+    $_SESSION['utilisateurConnecte'] = $_POST['login'];
     $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
 
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('pin', 'Entrer code PIN :'), 1);
@@ -23,8 +22,7 @@ if (isset($_POST['login']) && $_POST['login'] != "") {
 
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputSubmit('submitConnex', 'submitConnex', 'Valider', ''), 2);
     $formulaireConnexion->ajouterComposantTab();
-} else if (isset($_POST['pin']) && boitierDAO::verifPIN($utilisateurConnecte, $_POST['pin'])) {
-
+} else if (isset($_POST['pin']) && boitierDAO::verifPIN($_SESSION['utilisateurConnecte'], $_POST['pin'])) {
     $formulaireConnexion = new Formulaire('post', '', 'fConnexion', 'connexion');
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerLabelFor('etat_propre_ext', 'Notez l\'état de propreté EXTERIEURE'), 1);
     $formulaireConnexion->ajouterComposantLigne($formulaireConnexion->creerInputTexteMinMax('etat_propre_ext', 'etat_propre_ext', '', 1, 'Niveau de propreté', '', 1, 4), 1);

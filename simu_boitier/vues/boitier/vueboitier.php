@@ -2,8 +2,8 @@
     <?php include 'vues/vueHaut.php'; ?>
     <style type="text/css">
         @import url('styles/boitier.css');
-        </style>
-        
+    </style>
+
 
 </header>
 

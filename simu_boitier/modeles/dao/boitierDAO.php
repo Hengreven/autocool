@@ -19,18 +19,13 @@ class boitierDAO {
     }
 
     public static function verifPIN($unUser, $unPIN) {
-        $requetePrepar = DBConnex::getInstance()->prepare("SELECT CODEPIN FROM UTILISATEUR WHERE login = 'jmazagot'");
+        $requetePrepar = DBConnex::getInstance()->prepare("SELECT CODEPIN FROM UTILISATEUR WHERE login = :unuser");
         $requetePrepar->bindParam(":unuser", $unUser);
-        var_dump($requetePrepar->fetch());
         $requetePrepar->execute();
 
         $codePIN = $requetePrepar->fetch();
 
-        // var_dump($codePIN);
-        // var_dump("Salut");
-        // var_dump($unPIN);
-
-        if ($codePIN == $unPIN) {
+        if ($codePIN[0] == $unPIN) {
             return true;
         } else {
             return false;
