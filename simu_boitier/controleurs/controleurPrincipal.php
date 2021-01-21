@@ -15,6 +15,8 @@ $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("AffichageInfosV
 
 $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("Boitier",  "images/boitier_pin.jpg", "Boitier"));
 
+$menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("SimulateurTarif",  "images/tarifs-simulator.png", "Simulateur boitier"));
+
 $menuPrincipal = $menuPrincipal->creerMenu("menuPrincipal", $_SESSION['menuPrincipal']);
 
 include_once dispatcher::dispatch($_SESSION['menuPrincipal']);
