@@ -2,7 +2,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 1500px;
-    background-image: url("../images/fond3.png");
+    /*background-image: url("../images/fond3.png");*/
     background-repeat: repeat-x;
 }
 
@@ -38,7 +38,6 @@ main {
     width: 240px;
     height: 130px;
     font-size: 17px;
-    font-family: Helvetica;
     font-weight: bold;
     vertical-align: bottom;
     color: #aec5d3;

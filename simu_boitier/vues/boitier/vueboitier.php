@@ -9,6 +9,8 @@
 
 <main id="boitier">
 
+    <p>Véhicule S, formule "Liberté"</p>
+
     <div id="boiteConnex">
 
         <div id="formulaire">
@@ -16,8 +18,8 @@
         </div>
 
     </div>
+
 </main>
 <footer>
 </footer>
 <?php include 'vues/vueBas.php'; ?>
-</footer>

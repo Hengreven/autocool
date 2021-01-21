@@ -1,4 +1,3 @@
-<div>
     <header>
         <?php include 'vues/vueHaut.php'; ?>
     </header>
@@ -22,5 +21,3 @@
     <footer>
     </footer>
     <?php include 'vues/vueBas.php'; ?>
-    </footer>
-</div>

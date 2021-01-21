@@ -9,4 +9,3 @@
     <footer>
     </footer>
     <?php include 'vues/vueBas.php'; ?>
-    </footer>

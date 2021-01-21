@@ -1,4 +1,7 @@
 <?php
+// Définit le fuseau horaire par défaut à utiliser. Disponible depuis PHP 5.1
+date_default_timezone_set('UTC');
+
 class Formulaire
 {
 	private $method;
@@ -66,6 +69,12 @@ class Formulaire
 		return $composant;
 	}
 
+	public  function creerTitre($unId, $uneClass, $Texte) {
+        $composant = "<h1 id='".$unId."' class='".$uneClass."' ";
+        $composant .= ">" . $Texte . "</h1>";
+        return $composant;
+    }
+
 	public function creerInputNumber($unNom, $unId, $uneValue, $required, $placeholder, $readOnly)
 	{
 		$composant = "<input type = 'number' name = '" . $unNom . "' id = '" . $unId . "' ";
@@ -102,7 +111,7 @@ class Formulaire
 
 	public function creerInputMaxLenght($unNom, $unId, $uneValue, $required, $maxlength)
 	{
-		$composant = "<input type = 'password' name = '" . $unNom . "' maxlength= '" . $maxlength . "' id = '" . $unId . "' ";
+		$composant = "<input type = 'number' name = '" . $unNom . "' maxlength= '" . $maxlength . "' id = '" . $unId . "' ";
 		if (!empty($uneValue)) {
 			$composant .= "value = '" . $uneValue . "' ";
 		}
@@ -142,7 +151,7 @@ class Formulaire
 	{
 		$composant = "<input type = 'radio' name = '" . $unNom . "' id = '" . $unId . "' ";
 		$composant .= "value = '" . $uneValue . "'";
-		
+
 		if ($checked) {
 			$composant .= "checked>";
 		} else {
@@ -153,6 +162,20 @@ class Formulaire
 
 		return $composant;
 	}
+
+    public function creerInputRadioWithIMG($unNom, $unId, $uneValue, $checked, $src, $uneOption)
+    {
+        $composant = "<label id='".$unId."'><input type = 'radio' name = '" . $unNom . "' value = '" . $uneValue . "'";
+
+        if ($checked) {
+            $composant .= "checked>";
+        } else {
+            $composant .= ">";
+        }
+        $composant .= "<img src='" .$src. "'><br>".$uneOption."</label>";
+
+        return $composant;
+    }
 
 	public function creerInputSubmit($unNom, $unId, $uneValue, $uneFonctionOnClick)
 	{
@@ -168,6 +191,11 @@ class Formulaire
 		return $composant;
 	}
 
+	public function creerInputDateTime($unNom, $unId) {
+		$composant = "<input type='datetime-local' id= '" .$unId . "' ";
+		$composant .= "name= '" . $unNom . "' value='" . date('Y-m-d H:i') . "'>";
+		return $composant;
+	}
 
 	public function creerFormulaire()
 	{
@@ -187,6 +215,7 @@ class Formulaire
 		$this->formulaireToPrint .= "</table></form>";
 		return $this->formulaireToPrint;
 	}
+
 
 	public function afficherFormulaire()
 	{

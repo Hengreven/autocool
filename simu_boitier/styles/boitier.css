@@ -25,7 +25,8 @@ main {
     background-color: #d6d503;
 }
 
-#finalsubmit {
+#takekey,
+#dropkey {
     border-radius: 10px;
     padding: 8px;
     background-color: #d6d503;
