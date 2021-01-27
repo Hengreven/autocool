@@ -4,7 +4,7 @@
     </header>
 
     <main>
-        <?php echo $menuStations; ?>
+        <?php echo $formDetailsStation->afficherFormulaire(); ?>
     </main>
     <footer>
     </footer>
