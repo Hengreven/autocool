@@ -5,6 +5,23 @@ class Station
     protected $numstation;
     protected $villestation;
     protected $lieu;
+    protected $arretProche = array();
+
+    /**
+     * @return array
+     */
+    public function getArretProche()
+    {
+        return $this->arretProche;
+    }
+
+    /**
+     * @param array $arretProche
+     */
+    public function setArretProche($arretProche)
+    {
+        $this->arretProche = $arretProche;
+    }
 
     /**
      * Station constructor.
