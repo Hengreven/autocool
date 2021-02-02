@@ -9,8 +9,6 @@
 
 <main id="boitier">
 
-    <p>Véhicule S, formule "Liberté"</p>
-
     <div id="boiteConnex">
 
         <div id="formulaire">

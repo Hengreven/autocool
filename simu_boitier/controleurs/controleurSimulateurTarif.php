@@ -3,15 +3,21 @@
 $message_erreur = "";
 $tarif = 0;
 $hours = 0;
+
+$listeCodeTypeVoiture = tarifDAO::getCodeTypeVehicule();
+$listeFormuleAbo = tarifDAO::getFormuleAbonnement();
+
+
 $formulaireTarif = new Formulaire('post', '', 'fTarif', 'connexion');
 
 $formulaireTarif->ajouterComposantLigne($formulaireTarif->creerTitre('', '', "Choix du véhicule :"), 3);
 $formulaireTarif->ajouterComposantTab();
 
 //Choisir catégorie voiture
-$formulaireTarif->ajouterComposantLigne($formulaireTarif->creerInputRadioWithIMG('categ_voiture', 'categ_voiture', 'S', false, './images/car-s.png', "S"), 1);
-$formulaireTarif->ajouterComposantLigne($formulaireTarif->creerInputRadioWithIMG('categ_voiture', 'categ_voiture', 'M', false, './images/car-m.png',"M"), 1);
-$formulaireTarif->ajouterComposantLigne($formulaireTarif->creerInputRadioWithIMG('categ_voiture', 'categ_voiture', 'L', false, './images/car-l.png',"L"), 1);
+foreach ($listeCodeTypeVoiture as $option) {
+    $formulaireTarif->ajouterComposantLigne($formulaireTarif->creerInputRadioWithIMG('categ_voiture', 'categ_voiture', $option['CODETYPE'], false, $option['URL'],$option['CODETYPE']), 1);
+}
+
 $formulaireTarif->ajouterComposantTab();
 
 $formulaireTarif->ajouterComposantLigne($formulaireTarif->creerTitre('', '', "Durée de location"), 3);
@@ -31,9 +37,10 @@ $formulaireTarif->ajouterComposantLigne($formulaireTarif->creerTitre('', '', "Fo
 $formulaireTarif->ajouterComposantTab();
 
 //Choisir formule d'abonnement
-$formulaireTarif->ajouterComposantLigne($formulaireTarif->creerInputRadio('formule_abonnement', 'formule_abonnement', 'COO', false, 'Coopérative'), 1);
-$formulaireTarif->ajouterComposantLigne($formulaireTarif->creerInputRadio('formule_abonnement', 'formule_abonnement', 'CLA', false, 'Classique'), 1);
-$formulaireTarif->ajouterComposantLigne($formulaireTarif->creerInputRadio('formule_abonnement', 'formule_abonnement', 'LIB', false, 'Liberté'), 1);
+
+foreach ($listeFormuleAbo as $formule) {
+    $formulaireTarif->ajouterComposantLigne($formulaireTarif->creerInputRadio('formule_abonnement', 'formule_abonnement', $formule['CODEFORMULE'], false, $formule['LIBELLEFORMULE']), 1);
+}
 $formulaireTarif->ajouterComposantTab();
 
 $formulaireTarif->ajouterComposantLigne($formulaireTarif->creerTitre('', '', "Distance (km) :"), 3);
