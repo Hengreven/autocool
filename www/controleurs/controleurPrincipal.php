@@ -26,10 +26,11 @@ $menuPrincipal = new Menu("menuPrincipal");
 
 if(!isset($_SESSION['identification']) || !$_SESSION['identification']){
     $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("accueilConsult",  "images/equipe.png" , "Accueil"));
+    $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("ListeStation",  "images/voiture.png" , "Liste des stations"));
     $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("connexion",  "images/connex.png" , "Connexion"));
 }else{
     $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("accueilUtilisateur",  "images/equipe.png" , "Accueil"));
-    $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("ListeStation",  "images/equipe.png" , "Liste des stations"));
+    $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("ListeStation",  "images/voiture.png" , "Liste des stations"));
     $menuPrincipal->ajouterComposant($menuPrincipal->creerItemImage("connexion",  "images/deconnex.png" , "Deconnexion"));
 }
 

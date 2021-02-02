@@ -9,7 +9,7 @@ class Parking extends Station
      * @param $nomParking
      * @param $niveau
      */
-    public function __construct($numstation= NULL,$nomParking= NULL, $niveau= NULL,$villestation= NULL,$lieu= NUL)
+    public function __construct($numstation= NULL,$nomParking= NULL, $niveau= NULL,$villestation= NULL,$lieu= NULL)
     {
         parent::__construct($numstation,$villestation,$lieu);
         $this->nomParking = $nomParking;
