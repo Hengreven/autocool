@@ -95,4 +95,23 @@ class tarifDAO
         return $tarif[0];
     }
 
+    public static function getCodeTypeVehicule()
+    {
+        $requetePrepa = DBConnex::getInstance()->prepare("SELECT CODETYPE, URL FROM CATEGORIE");
+        $requetePrepa->execute();
+        $liste = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+
+        return $liste;
+    }
+
+    public static function getFormuleAbonnement()
+    {
+        $requetePrepa = DBConnex::getInstance()->prepare("SELECT CODEFORMULE, LIBELLEFORMULE FROM FORMULE");
+        $requetePrepa->execute();
+        $liste = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+
+        return $liste;
+    }
+
+
 }

@@ -130,7 +130,39 @@ class Formulaire
 		return $composant;
 	}
 
-	public function creerSelect($unNom, $unId, $unLabel, $options)
+    public function creerSelectDateReservation($unNom, $unId, $firstOption, $options)
+    {
+        $composant = "<select  name = '" . $unNom . "' id = '" . $unId . "' >";
+        $i = 0;
+        $composant .= "<option value=''>$firstOption</option>";
+        foreach ($options as $option) {
+            $composant .= "<option value = '";
+            $composant .= $option['DATERESERVATION'];
+            $i++;
+            $composant .= "'> " . $option["DATERESERVATION"];
+            $composant .= "</option>";
+        }
+        $composant .= "</select></td></tr>";
+        return $composant;
+    }
+
+    public function creerSelectImmatriculation($unNom, $unId, $firstOption, $options)
+{
+    $composant = "<select  name = '" . $unNom . "' id = '" . $unId . "' >";
+    $i = 0;
+    $composant .= "<option value=''>$firstOption</option>";
+    foreach ($options as $option) {
+        $composant .= "<option value = '";
+        $composant .= $option['NUMIMMAT'];
+        $i++;
+        $composant .= "'> " . $option["NUMIMMAT"];
+        $composant .= "</option>";
+    }
+    $composant .= "</select></td></tr>";
+    return $composant;
+}
+
+	public function creerSelectLogin($unNom, $unId, $unLabel, $options)
 	{
 		$composant = "<select  name = '" . $unNom . "' id = '" . $unId . "' >";
 		$i = 0;
