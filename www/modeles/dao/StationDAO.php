@@ -27,7 +27,8 @@ class StationDAO
         if(!empty($tmpVoirie)){
             $voirie = new Voirie();
             $voirie->hydrate($tmpVoirie[0]);
-            //TODO : get arret proche;
+
+            //recup des arret de tram proches
             $requetePrepaArretProche = DBConnex::getInstance()->prepare("SELECT NOMARRET,VILLEARRET,appartient.CODELIGNE FROM arret_de_tram , appartient,ligne_tram,est_proche WHERE appartient.CODEARRET = arret_de_tram.CODEARRET AND appartient.CODELIGNE = ligne_tram.CODELIGNE AND arret_de_tram.CODEARRET = est_proche.CODEARRET AND NUMSTATION = :numstation");
             $requetePrepaArretProche->bindParam("numstation",$numStation);
             $requetePrepaArretProche->execute();
@@ -42,6 +43,22 @@ class StationDAO
                 }
             }
             $voirie->setArretProche($lstArret);
+
+
+            $requetePrepaVehicules = DBConnex::getInstance()->prepare("select NUMIMMAT, KILOMETRAGE, NIVEAUESSENCE, LIBELLECATEGORIE from vehicule,categorie where NUMSTATION=:numstation AND vehicule.CODECATEGORIE = categorie.CODECATEGORIE");
+            $requetePrepaVehicules->bindParam("numstation",$numStation);
+            $requetePrepaVehicules->execute();
+            $tmpVehicules = $requetePrepaVehicules->fetchAll(PDO::FETCH_ASSOC);
+            $lstVehicules = [];
+            if(!empty($tmpVehicules)){
+                foreach($tmpVehicules as $vehicule){
+                    $unVehicule = new Voiture();
+                    $unVehicule->hydrate($vehicule);
+                    $unVehicule->setLibelleCateg($vehicule["LIBELLECATEGORIE"]);
+                    $lstVehicules[] = $unVehicule;
+                }
+            }
+            $voirie->setVehicules($lstVehicules);
             return $voirie;
         }else{
             $requetePrepaParking = DBConnex::getInstance()->prepare("SELECT * FROM PARKING WHERE numstation = :numstation");
@@ -66,6 +83,22 @@ class StationDAO
                     }
                 }
                 $parking->setArretProche($lstArret);
+
+
+                $requetePrepaVehicules = DBConnex::getInstance()->prepare("select NUMIMMAT, KILOMETRAGE, NIVEAUESSENCE, LIBELLECATEGORIE from vehicule,categorie where NUMSTATION=:numstation AND vehicule.CODECATEGORIE = categorie.CODECATEGORIE");
+                $requetePrepaVehicules->bindParam("numstation",$numStation);
+                $requetePrepaVehicules->execute();
+                $tmpVehicules = $requetePrepaVehicules->fetchAll(PDO::FETCH_ASSOC);
+                $lstVehicules = [];
+                if(!empty($tmpVehicules)){
+                    foreach($tmpVehicules as $vehicule){
+                        $unVehicule = new Voiture();
+                        $unVehicule->hydrate($vehicule);
+                        $unVehicule->setLibelleCateg($vehicule["LIBELLECATEGORIE"]);
+                        $lstVehicules[] = $unVehicule;
+                    }
+                }
+                $parking->setVehicules($lstVehicules);
                 return $parking;
             }else{
                 return 'erreur';

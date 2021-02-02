@@ -1,5 +1,4 @@
 <?php
-echo 'test';
 $_SESSION["listeStations"] = new Stations(StationDAO::lesStations());
 $menuStations = new Menu("listeStations");
 foreach($_SESSION["listeStations"]->getStations() as $uneSation){

@@ -6,6 +6,7 @@ class Station
     protected $villestation;
     protected $lieu;
     protected $arretProche = array();
+    protected $vehicules = array();
 
     /**
      * @return array
@@ -22,6 +23,24 @@ class Station
     {
         $this->arretProche = $arretProche;
     }
+
+    /**
+     * @return array
+     */
+    public function getVehicules()
+    {
+        return $this->vehicules;
+    }
+
+    /**
+     * @param array $vehicules
+     */
+    public function setVehicules($vehicules)
+    {
+        $this->vehicules = $vehicules;
+    }
+
+
 
     /**
      * Station constructor.

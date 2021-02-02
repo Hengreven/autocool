@@ -14,6 +14,7 @@ if(get_class($detailsStation) == 'Voirie'){
     $formDetailsStation->ajouterComposantTab();
     $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Nombres de places : ',''),$formDetailsStation->creerLabel($detailsStation->getNbplaces(),'')),2);
     $formDetailsStation->ajouterComposantTab();
+
     $formDetailsStation->ajouterComposantLigne($formDetailsStation->creerLabel("Liste des arret proches : ",''),2);
     $formDetailsStation->ajouterComposantTab();
 
@@ -21,6 +22,15 @@ if(get_class($detailsStation) == 'Voirie'){
     $lstArret = $detailsStation->getArretProche();
     foreach($lstArret as $unArret){
         $formDetailsStation->ajouterComposantLigne($formDetailsStation->creerLabel("    - ".$unArret->getVilleArret() . " - " . $unArret->getNomArret() . " - Ligne " . $unArret->getLigneArret(),''),2);
+        $formDetailsStation->ajouterComposantTab();
+    }
+
+    $formDetailsStation->ajouterComposantLigne($formDetailsStation->creerLabel("Liste des véhicules de la station : ",''),2);
+    $formDetailsStation->ajouterComposantTab();
+    //recuperation des vehicules
+    $lstVehicule = $detailsStation->getVehicules();
+    foreach($lstVehicule as $unVehicule){
+        $formDetailsStation->ajouterComposantLigne($formDetailsStation->creerLabel("    - ".$unVehicule->getNumImmat() . " - " . $unVehicule->getLibelleCateg() . " - " . $unVehicule->getKilometrage() . "kms",''),2);
         $formDetailsStation->ajouterComposantTab();
     }
     $formDetailsStation->creerFormulaire();
@@ -39,6 +49,15 @@ if(get_class($detailsStation) == 'Voirie'){
     $lstArret = $detailsStation->getArretProche();
     foreach($lstArret as $unArret){
         $formDetailsStation->ajouterComposantLigne($formDetailsStation->creerLabel("    - ".$unArret->getVilleArret() . " - " . $unArret->getNomArret() . " - Ligne " . $unArret->getLigneArret(),''),2);
+        $formDetailsStation->ajouterComposantTab();
+    }
+
+    $formDetailsStation->ajouterComposantLigne($formDetailsStation->creerLabel("Liste des véhicules de la station : ",''),2);
+    $formDetailsStation->ajouterComposantTab();
+    //recuperation des vehicules
+    $lstVehicule = $detailsStation->getVehicules();
+    foreach($lstVehicule as $unVehicule){
+        $formDetailsStation->ajouterComposantLigne($formDetailsStation->creerLabel("    - ".$unVehicule->getNumImmat() . " - " . $unVehicule->getLibelleCateg() . " - " . $unVehicule->getKilometrage() . "kms",''),2);
         $formDetailsStation->ajouterComposantTab();
     }
     $formDetailsStation->creerFormulaire();
