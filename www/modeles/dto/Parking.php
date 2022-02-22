@@ -3,6 +3,23 @@ class Parking extends Station
 {
     protected $nomParking;
     protected $niveau;
+    protected $type;
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
 
     /**
      * Parking constructor.

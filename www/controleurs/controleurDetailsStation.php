@@ -5,15 +5,27 @@ if(isset($_GET["station"])){
     echo "erreur";
 }
 $detailsStation = StationDAO::detailsStation($stationSelected);
+//var_dump($detailsStation);
 if(get_class($detailsStation) == 'Voirie'){
-//    var_dump($detailsStation);
     $formDetailsStation = new Formulaire('','','details','details');
     $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Nom : ',''),$formDetailsStation->creerLabel($detailsStation->getVillestation() . ' - '. $detailsStation->getLieu(),'')),2);
     $formDetailsStation->ajouterComposantTab();
+
+
+    $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Type de station : ',''),$formDetailsStation->creerLabel("Voirie",'')),2);
+    $formDetailsStation->ajouterComposantTab();
+
+
     $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Adresse : ',''),$formDetailsStation->creerLabel($detailsStation->getAdresse(),'')),2);
     $formDetailsStation->ajouterComposantTab();
-    $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Nombres de places : ',''),$formDetailsStation->creerLabel($detailsStation->getNbplaces(),'')),2);
+
+
+    $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Nombres de places totales : ',''),$formDetailsStation->creerLabel($detailsStation->getNbplaces(),'')),2);
     $formDetailsStation->ajouterComposantTab();
+    foreach($detailsStation->getCapa() as $uneCapacite){
+        $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Nombres de places ' . $uneCapacite['codetype'] . ': ',''),$formDetailsStation->creerLabel($uneCapacite["capacité"],'')),2);
+        $formDetailsStation->ajouterComposantTab();
+    }
 
     $formDetailsStation->ajouterComposantLigne($formDetailsStation->creerLabel("Liste des arret proches : ",''),2);
     $formDetailsStation->ajouterComposantTab();
@@ -38,6 +50,10 @@ if(get_class($detailsStation) == 'Voirie'){
 //    var_dump($detailsStation);
     $formDetailsStation = new Formulaire('','','details','details');
     $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Nom : ',''),$formDetailsStation->creerLabel($detailsStation->getVillestation() . ' - '. $detailsStation->getLieu(),'')),2);
+    $formDetailsStation->ajouterComposantTab();
+    $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Type de station : ',''),$formDetailsStation->creerLabel("Parking",'')),2);
+    $formDetailsStation->ajouterComposantTab();
+    $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Type de parking : ',''),$formDetailsStation->creerLabel($detailsStation->getType(),'')),2);
     $formDetailsStation->ajouterComposantTab();
     $formDetailsStation->ajouterComposantLigne($formDetailsStation->concactComposants($formDetailsStation->creerLabel('Nom du parking : ',''),$formDetailsStation->creerLabel($detailsStation->getNomParking(),'')),2);
     $formDetailsStation->ajouterComposantTab();

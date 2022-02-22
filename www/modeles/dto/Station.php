@@ -7,6 +7,24 @@ class Station
     protected $lieu;
     protected $arretProche = array();
     protected $vehicules = array();
+    protected $capa = array();
+
+    /**
+     * @return array
+     */
+    public function getCapa()
+    {
+        return $this->capa;
+    }
+
+    /**
+     * @param array $capa
+     */
+    public function setCapa($capa)
+    {
+        $this->capa = $capa;
+    }
+
 
     /**
      * @return array

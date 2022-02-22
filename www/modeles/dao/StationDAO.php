@@ -18,6 +18,24 @@ class StationDAO
         return $result;
     }
 
+    public static function lesStationsFiltre($arret,$categ){
+        $result = [];
+        $requetePrepa = DBConnex::getInstance()->prepare("select distinct station.* from station inner join est_proche ep on station.NUMSTATION = ep.NUMSTATION inner join vehicule v on station.NUMSTATION = v.NUMSTATION where (v.CODECATEGORIE = :code_categ OR :code_categ = -1) and (ep.CODEARRET = :code_arret or :code_arret = -1)");
+        $requetePrepa->bindParam("code_categ",$categ);
+        $requetePrepa->bindParam("code_arret",$arret);
+        $requetePrepa->execute();
+        $tmp = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+
+        if(!empty($tmp)){
+            foreach($tmp as $station){
+                $uneStation = new Station();
+                $uneStation->hydrate($station);
+                $result[] = $uneStation;
+            }
+        }
+        return $result;
+    }
+
     public static function detailsStation(Station $uneStation){
         $requetePrepaVoirie = DBConnex::getInstance()->prepare("SELECT * FROM VOIRIE WHERE numstation = :numstation");
         $numStation = $uneStation->getNumstation();
@@ -59,6 +77,21 @@ class StationDAO
                 }
             }
             $voirie->setVehicules($lstVehicules);
+            $requetePrepaCapa = DBConnex::getInstance()->prepare("select codetype,capacité from capacité,voirie where capacité.numvoirie = voirie.numvoirie  and numstation=:numstation");
+            $requetePrepaCapa->bindParam("numstation",$numStation);
+
+
+            $requetePrepaCapa->execute();
+            $tmpCapaS = $requetePrepaCapa->fetchAll(PDO::FETCH_ASSOC);
+            $voirie->setCapa($tmpCapaS);
+
+            $requetePrepaCapa = DBConnex::getInstance()->prepare("select sum(capacité) as total from capacité,voirie where capacité.numvoirie = voirie.numvoirie  and numstation=:numstation");
+            $requetePrepaCapa->bindParam("numstation",$numStation);
+            $requetePrepaCapa->execute();
+
+            $tmpCapaTotale = $requetePrepaCapa->fetch(PDO::FETCH_ASSOC);
+
+            $voirie->setNbplaces($tmpCapaTotale['total']);
             return $voirie;
         }else{
             $requetePrepaParking = DBConnex::getInstance()->prepare("SELECT * FROM PARKING WHERE numstation = :numstation");

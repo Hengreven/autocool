@@ -4,6 +4,7 @@
     </header>
 
     <main>
+        <?php echo $formFiltre->afficherFormulaire(); ?>
         <?php echo $menuStations; ?>
     </main>
     <footer>

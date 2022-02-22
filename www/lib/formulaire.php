@@ -78,20 +78,46 @@ class Formulaire{
 		return $composant;
 	}
 
-	public function creerSelect($unNom, $unId, $unLabel, $options){
+	public function creerSelectArret($unNom, $unId, $unLabel, $options,$selected){
 		$composant = "<select  name = '" . $unNom . "' id = '" . $unId . "' >";
 		$i = 0;
+		$composant.= "<option value='-1'> --- Filtre désactivé --- </option>";
 		foreach ($options as $option){
+            if($option->getCodeArret() == $selected){
+                $composant .= "<option selected=true value = '" ;
+            }else{
+                $composant .= "<option value = '" ;
+            }
 			$composant .= "<option value = '" ;
-			$tab = $options[$i];
-			$composant .= $tab->getIdEquipe();
+			$tab = $option[$i];
+			$composant .= $tab->getCodeArret();
 			$i++;
-			$composant .= "'> " . $tab->getNomEquipe();
+			$composant .= "'> " . $tab->getNomArret();
 			$composant .= "</option>";
 		}
 		$composant .= "</select></td></tr>";
 		return $composant;
-	}	
+	}
+
+    public function creerSelectCateg($unNom, $unId, $unLabel, $options , $selected){
+        $composant = "<select  name = '" . $unNom . "' id = '" . $unId . "' >";
+        $i = 0;
+        $composant.= "<option value='-1'> --- Filtre désactivé --- </option>";
+        foreach ($options as $option){
+            if($option->getCodeCategorie() == $selected){
+                $composant .= "<option selected=true value = '" ;
+            }else{
+                $composant .= "<option value = '" ;
+            }
+            $tab = $option;
+            $composant .= $tab->getCodeCategorie();
+            $i++;
+            $composant .= "'> " . $tab->getLibelleCategorie();
+            $composant .= "</option>";
+        }
+        $composant .= "</select></td></tr>";
+        return $composant;
+    }
 	
 	public function creerInputSubmit($unNom, $unId, $uneValue,$uneFonctionOnClick){
 		$composant = "<input type = 'submit' name = '" . $unNom . "' id = '" . $unId . "' ";
